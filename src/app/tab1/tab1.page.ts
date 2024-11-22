@@ -41,4 +41,9 @@ export class Tab1Page {
         });
     }
   }
+
+  guardarLibro(libro: any, imagen: any) {
+    this.dogServices
+      .guardarEnFirebase(libro.title, imagen)
+  }
 }

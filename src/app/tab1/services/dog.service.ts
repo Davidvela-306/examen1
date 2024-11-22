@@ -1,10 +1,24 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import axios from 'axios';
+import { inject } from '@angular/core';
+import {
+  Firestore,
+  collectionData,
+  collection,
+  addDoc,
+} from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DogServices {
+  private firestore: Firestore;
+
+  constructor(@Inject(Firestore) firestore: Firestore) {
+    this.firestore = firestore;
+  }
+
   obtenerImagenDePerro() {
     console.log('obtenerImagenDePerro');
     return axios
@@ -32,5 +46,15 @@ export class DogServices {
         throw error;
       });
   }
-  
+
+  /* guardar en firebase el titulo del libro y la url de la imagen */
+  guardarEnFirebase(titulo: string, url: string) {
+    console.log('guardarEnFirebase');
+    const librosRef = collection(this.firestore, 'libros');
+    const libro = {
+      titulo,
+      url,
+    };
+    return addDoc(librosRef, libro);
+  }
 }
