@@ -1,0 +1,16 @@
+<!-- src/app/tab1/tab1.page.html -->
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title> Tab 1 </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card *ngFor="let libro of libros; let i = index">
+    <ion-card-title>{{ libro.title }}</ion-card-title>
+    <ion-card-content>
+      <img [src]="imagenesDePerros[i]" />
+    </ion-card-content>
+    <ion-button expand="block" >Guardar</ion-button> 
+  </ion-card>
+</ion-content>
